@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archon | High-Ticket Monetization for Creators</title>
+  <link rel="icon" type="image/svg+xml" href="archon-logo.svg"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080808;
+      --surface: #0f0f0f;
+      --border: #1c1c1c;
+      --gold: #c9a84c;
+      --gold-light: #e2c46e;
+      --white: #f0f0f0;
+      --muted: #888;
+      --subtle: #3a3a3a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(8,8,8,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      color: var(--white);
+    }
+
+    .logo span { color: var(--gold); }
+
+    .nav-cta {
+      background: var(--gold);
+      color: #000;
+      padding: 11px 26px;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 140px 40px 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+      opacity: 0.9;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 7.5vw, 86px);
+      font-weight: 900;
+      line-height: 1.03;
+      letter-spacing: -3px;
+      margin-bottom: 28px;
+      max-width: 940px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 44px;
+      line-height: 1.75;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: #000;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-weight: 800;
+      font-size: 15px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      letter-spacing: -0.3px;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-ghost {
+      color: var(--muted);
+      font-size: 14px;
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+
+    .btn-ghost:hover { color: var(--white); }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 48px;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 100px 48px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 4.5vw, 54px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      line-height: 1.08;
+      margin-bottom: 20px;
+    }
+
+    .section-sub {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.75;
+    }
+
+    /* ── PROBLEM ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 64px;
+    }
+
+    .problem-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 36px 32px;
+      transition: border-color 0.2s;
+    }
+
+    .problem-card:hover { border-color: var(--subtle); }
+
+    .problem-card .icon {
+      font-size: 26px;
+      margin-bottom: 18px;
+    }
+
+    .problem-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+
+    .problem-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── SYSTEM ── */
+    .system-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: end;
+      margin-bottom: 56px;
+    }
+
+    .system-header-right {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.75;
+      padding-top: 20px;
+    }
+
+    .phases {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .phase {
+      background: var(--surface);
+      padding: 40px 36px;
+    }
+
+    .phase-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      opacity: 0.85;
+    }
+
+    .phase h3 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .phase ul { list-style: none; }
+
+    .phase ul li {
+      font-size: 14px;
+      color: var(--muted);
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .phase ul li:last-child { border-bottom: none; }
+
+    .phase ul li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── WHO IT'S FOR ── */
+    .audience-list {
+      margin-top: 52px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .audience-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 22px;
+      padding: 30px 36px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .audience-item:hover { border-color: var(--gold); }
+
+    .check {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(201,168,76,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+      font-size: 13px;
+      margin-top: 2px;
+      font-weight: 700;
+    }
+
+    .audience-item h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      letter-spacing: -0.3px;
+    }
+
+    .audience-item p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── INVESTMENT ── */
+    .investment-box {
+      margin-top: 64px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 72px 64px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .investment-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 360px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .invest-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .price-range {
+      font-size: clamp(52px, 7vw, 80px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      color: var(--gold);
+      margin: 8px 0 20px;
+      line-height: 1;
+    }
+
+    .investment-box .invest-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.75;
+    }
+
+    .tiers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 0 auto 44px;
+      max-width: 640px;
+      text-align: left;
+    }
+
+    .tier {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+
+    .tier-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .tier h4 {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.3px;
+    }
+
+    .tier p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .tier .tier-price {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--white);
+      letter-spacing: -1px;
+      margin-top: 14px;
+    }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      padding: 120px 48px;
+      text-align: center;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .cta-section h2 {
+      font-size: clamp(38px, 5.5vw, 64px);
+      font-weight: 900;
+      letter-spacing: -2.5px;
+      margin-bottom: 18px;
+      line-height: 1.05;
+    }
+
+    .cta-section h2 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .cta-section p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 44px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.75;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .email-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .email-link:hover { color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--subtle);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      section { padding: 80px 24px; }
+      .divider { margin: 0 24px; }
+      .system-header { grid-template-columns: 1fr; gap: 32px; }
+      .phases { grid-template-columns: 1fr; }
+      .tiers { grid-template-columns: 1fr; }
+      .investment-box { padding: 48px 28px; }
+      .cta-section { padding: 80px 24px; }
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Archon<span>.</span></div>
+    <a href="#book" class="nav-cta">Book Free Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <p class="hero-label">High-Ticket Monetization for Content Creators</p>
+    <h1>We Turn Your Audience<br>Into <em>High-Ticket Clients</em></h1>
+    <p>You've built the following. We build the machine that converts it. From the first DM to the signed contract, Archon installs the complete monetization system for creators ready to stop leaving money on the table.</p>
+    <div class="hero-actions">
+      <a href="#book" class="btn-primary">Book Free Consultation</a>
+      <a href="#system" class="btn-ghost">See how it works ↓</a>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROBLEM -->
+  <section>
+    <p class="section-label">The Problem</p>
+    <h2 class="section-title">Your content is working.<br>Your income isn't.</h2>
+    <p class="section-sub">Most creators don't have a content problem. They have a monetization problem. Here's what that looks like.</p>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">💸</div>
+        <h3>Your Audience Isn't Converting</h3>
+        <p>You have followers who trust you — but your bank account doesn't match your influence. Likes and views don't pay bills. A monetization system does.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📉</div>
+        <h3>You're Stuck on Low-Ticket</h3>
+        <p>Brand deals, $27 products, affiliate links. Meanwhile you're leaving $5,000–$20,000 clients sitting untouched in your existing audience every month.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🔁</div>
+        <h3>No System, No Consistency</h3>
+        <p>You've tried selling before. But without a repeatable process, income is random. Some months great, most months unpredictable. You can't scale what you can't repeat.</p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">⏱</div>
+        <h3>You're the Bottleneck</h3>
+        <p>Content, outreach, sales — it all runs on your time. No infrastructure means no scale. You need a system that works beyond your personal bandwidth.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SYSTEM -->
+  <section id="system">
+    <div class="system-header">
+      <div>
+        <p class="section-label">The Archon System</p>
+        <h2 class="section-title">End-to-end monetization.<br>Built inside your brand.</h2>
+      </div>
+      <p class="system-header-right">We don't hand you a course or a template. We build and operate the full high-ticket acquisition engine for you — inside your existing brand and audience. From the first piece of content to the closed client.</p>
+    </div>
+    <div class="phases">
+      <div class="phase">
+        <p class="phase-num">Phase 01 / Attract</p>
+        <h3>Position Your Offer to Buyers</h3>
+        <ul>
+          <li>High-ticket offer design and positioning</li>
+          <li>Content strategy that attracts buyers</li>
+          <li>Webinar and lead capture funnels</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <p class="phase-num">Phase 02 / Nurture</p>
+        <h3>Turn Followers Into Intent</h3>
+        <ul>
+          <li>DM outreach and qualifying scripts</li>
+          <li>Email sequences for warm leads</li>
+          <li>Automated follow-up systems</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <p class="phase-num">Phase 03 / Convert</p>
+        <h3>Close Calls Into Clients</h3>
+        <ul>
+          <li>Appointment setting from your audience</li>
+          <li>High-ticket sales process and scripting</li>
+          <li>Objection handling frameworks</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <p class="phase-num">Phase 04 / Scale</p>
+        <h3>Build What Runs Without You</h3>
+        <ul>
+          <li>Setter and closer recruitment</li>
+          <li>Revenue dashboards and reporting</li>
+          <li>Systems and SOPs for the full pipeline</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- WHO IT'S FOR -->
+  <section>
+    <p class="section-label">Who It's For</p>
+    <h2 class="section-title">We don't work<br>with everyone.</h2>
+    <p class="section-sub">Archon is for creators with a real audience who are ready to monetize seriously. If that's you, keep reading.</p>
+    <div class="audience-list">
+      <div class="audience-item">
+        <div class="check">✓</div>
+        <div>
+          <h4>Content creators with 20K+ engaged followers</h4>
+          <p>Instagram, YouTube, TikTok, LinkedIn — platform doesn't matter. What matters is that your audience trusts you. We turn that trust into revenue.</p>
+        </div>
+      </div>
+      <div class="audience-item">
+        <div class="check">✓</div>
+        <div>
+          <h4>Creators with knowledge or expertise worth selling</h4>
+          <p>You've achieved a result people want. You have skills others are willing to pay for. You just don't have the sales infrastructure to charge what you're worth.</p>
+        </div>
+      </div>
+      <div class="audience-item">
+        <div class="check">✓</div>
+        <div>
+          <h4>Done chasing low-ticket and brand deals</h4>
+          <p>You're ready to move to $2,000–$10,000 offers. You know the math works. You just need the system, the scripts, and the process to make it happen consistently.</p>
+        </div>
+      </div>
+      <div class="audience-item">
+        <div class="check">✓</div>
+        <div>
+          <h4>Ready to install a real acquisition process</h4>
+          <p>You're committed to building something repeatable — not just posting and hoping. You want a pipeline, not a prayer.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INVESTMENT -->
+  <section>
+    <p class="section-label">Investment</p>
+    <h2 class="section-title">Two paths.<br>One outcome.</h2>
+    <div class="investment-box">
+      <p class="invest-eyebrow">Choose how you want to work with us</p>
+      <div class="price-range">$1,500 – $7,000</div>
+      <p class="invest-sub">Whether you want to learn the system yourself or have us build and run it for you — the goal is the same: high-ticket clients from your existing audience.</p>
+      <div class="tiers">
+        <div class="tier">
+          <p class="tier-label">Done-With-You</p>
+          <h4>The Conversion Blueprint</h4>
+          <p>We teach you the full system. You execute it with our guidance, scripts, and weekly coaching calls.</p>
+          <div class="tier-price">$1,500 – $2,500</div>
+        </div>
+        <div class="tier">
+          <p class="tier-label">Done-For-You</p>
+          <h4>Full Acquisition Install</h4>
+          <p>We build and run the entire pipeline for you. You focus on content. We close the clients.</p>
+          <div class="tier-price">$4,000 – $7,000</div>
+        </div>
+      </div>
+      <a href="#book" class="btn-primary">See If You Qualify</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section" id="book">
+    <h2>Ready to <em>monetize your audience?</em></h2>
+    <p>Book a free 30-minute strategy call. We'll map out exactly what your audience is worth and whether we can help you capture it.</p>
+    <div class="cta-actions">
+      <a href="https://cal.com/arthur-nkusi/30min" class="btn-primary">Book Free Call</a>
+      <a href="mailto:nkusiarthur11@gmail.com" class="email-link">or email nkusiarthur11@gmail.com</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="logo">Archon<span style="color: var(--gold);">.</span></div>
+    <p>© 2026 Archon. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
